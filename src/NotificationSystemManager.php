@@ -5,10 +5,11 @@ use Congredi\Notifications\NotificationTypes\Abstracts\AbstractNotificationType;
 use Congredi\Notifications\Traits\DispatchTrait;
 use Illuminate\Contracts\Bus\Dispatcher;
 use Illuminate\Contracts\Foundation\Application;
+use Congredi\Notifications\Jobs\GenericJob;
 
 class NotificationSystemManager implements NotificationSystemInterface
 {
-	use DispatchTrait
+	use DispatchTrait;
 
 	/**
 	 * @var \Illuminate\Contracts\Bus\Dispatcher
@@ -55,7 +56,7 @@ class NotificationSystemManager implements NotificationSystemInterface
 		$notificationTypeInstance = new $className($parameters);
 
 		//Create a new instance of a general generic Job.
-		$job = new \GenericJob($notificationTypeInstance);
+		$job = new GenericJob($notificationTypeInstance);
 
 		$this->dispatch($job);
 

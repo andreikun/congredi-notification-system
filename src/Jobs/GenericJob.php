@@ -1,4 +1,4 @@
-<?php
+<?php namespace Congredi\Notifications\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
