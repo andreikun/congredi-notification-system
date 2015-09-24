@@ -9,11 +9,4 @@ interface NotificationTypeInterface
 	 * @return mixed
 	 */
 	public static function className();
-
-	/**
-	 * Handle notification.
-	 *
-	 * @return mixed
-	 */
-	public function handle();
 }
