@@ -31,4 +31,12 @@ class GenericJob implements SelfHandling, ShouldQueue
 	{
 		$app->call([$this->notification, 'handle']);
 	}
+
+	/**
+	 * @param \Illuminate\Contracts\Foundation\Application $app
+	 */
+	public function failed(Application $app)
+	{
+		$app->call([$this->notification, 'failed']);
+	}
 }

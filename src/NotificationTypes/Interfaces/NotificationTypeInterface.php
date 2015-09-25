@@ -17,13 +17,15 @@ interface NotificationTypeInterface
 
 	/**
 	 * @param $adapter
-	 * @return mixed
+	 *
+	 * @return void
 	 */
 	public function setAdapter($adapter);
 
 	/**
 	 * @param $name
-	 * @return mixed
+	 *
+	 * @return void
 	 */
 	public function setQueueName($name);
 

@@ -24,7 +24,9 @@ abstract class AbstractNotificationType implements NotificationTypeInterface
 	public function __construct($properties = [])
 	{
 		foreach ($properties as $name => $value) {
-			$this->$name = $value;
+			if (property_exists(self::class, $name)) {
+				$this->{$name} = $value;
+			}
 		}
 	}
 
@@ -39,7 +41,9 @@ abstract class AbstractNotificationType implements NotificationTypeInterface
 	}
 
 	/**
-	 * @param $notificationService
+	 * @param $adapter
+	 *
+	 * @return void
 	 */
 	public function setAdapter($adapter)
 	{
@@ -64,6 +68,8 @@ abstract class AbstractNotificationType implements NotificationTypeInterface
 
 	/**
 	 * @param $name
+	 *
+	 * @return void
 	 */
 	public function setQueueName($name)
 	{
