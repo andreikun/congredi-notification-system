@@ -1,11 +1,11 @@
-<?php namespace Congredi\Notifications;
+<?php namespace Congredi\NotificationSystem;
 
-use Congredi\Notifications\Exceptions\InvalidNotificationTypeException;
-use Congredi\Notifications\NotificationTypes\Abstracts\AbstractNotificationType;
-use Congredi\Notifications\Traits\DispatchTrait;
+use Congredi\NotificationSystem\Exceptions\InvalidNotificationTypeException;
+use Congredi\NotificationSystem\NotificationTypes\Abstracts\AbstractNotificationType;
+use Congredi\NotificationSystem\Traits\DispatchTrait;
 use Illuminate\Contracts\Bus\Dispatcher;
 use Illuminate\Contracts\Foundation\Application;
-use Congredi\Notifications\Jobs\GenericJob;
+use Congredi\NotificationSystem\Jobs\GenericJob;
 
 class NotificationSystemManager implements NotificationSystemInterface
 {
@@ -39,7 +39,7 @@ class NotificationSystemManager implements NotificationSystemInterface
 	 * @param $className
 	 * @param array $parameters
 	 * @return bool
-	 * @throws \Congredi\Notifications\Exceptions\InvalidNotificationTypeException
+	 * @throws \Congredi\NotificationSystem\Exceptions\InvalidNotificationTypeException
 	 */
 	public function send($className, $parameters = array())
 	{

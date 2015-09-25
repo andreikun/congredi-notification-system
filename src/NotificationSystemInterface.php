@@ -1,4 +1,4 @@
-<?php namespace Congredi\Notifications;
+<?php namespace Congredi\NotificationSystem;
 
 
 interface NotificationSystemInterface

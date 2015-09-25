@@ -16,7 +16,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Congredi\\Notifications\\": "src"
+			"Congredi\\NotificationSystem\\": "src"
 		}
 	}
 }

@@ -1,4 +1,4 @@
-<?php namespace Congredi\Notifications\Facades;
+<?php namespace Congredi\NotificationSystem\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

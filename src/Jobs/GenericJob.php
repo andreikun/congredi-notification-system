@@ -1,11 +1,11 @@
-<?php namespace Congredi\Notifications\Jobs;
+<?php namespace Congredi\NotificationSystem\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Congredi\Notifications\NotificationTypes\Interfaces\NotificationTypeInterface;
+use Congredi\NotificationSystem\NotificationTypes\Interfaces\NotificationTypeInterface;
 use Illuminate\Contracts\Foundation\Application;
 
 class GenericJob implements SelfHandling, ShouldQueue
@@ -17,7 +17,7 @@ class GenericJob implements SelfHandling, ShouldQueue
 	/**
 	 * Create a new job instance.
 	 *
-	 * @param \Congredi\Notifications\NotificationTypes\Interfaces\NotificationTypeInterface $notification
+	 * @param \Congredi\NotificationSystem\NotificationTypes\Interfaces\NotificationTypeInterface $notification
 	 */
 	public function __construct(NotificationTypeInterface $notification)
 	{

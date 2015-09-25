@@ -1,4 +1,4 @@
-<?php namespace Congredi\Notifications\Exceptions;
+<?php namespace Congredi\NotificationSystem\Exceptions;
 
 class GenericException extends \Exception
 {

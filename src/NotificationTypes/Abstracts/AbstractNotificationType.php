@@ -1,9 +1,16 @@
-<?php namespace Congredi\Notifications\NotificationTypes\Abstracts;
+<?php namespace Congredi\NotificationSystem\NotificationTypes\Abstracts;
 
-use Congredi\Notifications\NotificationTypes\Interfaces\NotificationTypeInterface;
+use Congredi\NotificationSystem\NotificationTypes\Interfaces\NotificationTypeInterface;
 
 abstract class AbstractNotificationType implements NotificationTypeInterface
 {
+	/**
+	 * This is the notification service wich will be used to fire notifications.
+	 *
+	 * @var
+	 */
+	protected $notificationService;
+
 	/**
 	 * @param array $properties Easy way to set attributes at construction
 	 */
@@ -22,5 +29,21 @@ abstract class AbstractNotificationType implements NotificationTypeInterface
 	public static function className()
 	{
 		return static::class;
+	}
+
+	/**
+	 * @param $notificationService
+	 */
+	public function setNotificationService($notificationService)
+	{
+		$this->notificationService = $notificationService;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getNotificationService()
+	{
+		return $this->notificationService;
 	}
 }

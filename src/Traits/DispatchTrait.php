@@ -1,4 +1,4 @@
-<?php namespace Congredi\Notifications\Traits;
+<?php namespace Congredi\NotificationSystem\Traits;
 
 
 trait DispatchTrait

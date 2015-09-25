@@ -1,4 +1,4 @@
-<?php namespace Congredi\Notifications\NotificationTypes\Interfaces;
+<?php namespace Congredi\NotificationSystem\NotificationTypes\Interfaces;
 
 
 interface NotificationTypeInterface
@@ -9,4 +9,15 @@ interface NotificationTypeInterface
 	 * @return mixed
 	 */
 	public static function className();
+
+	/**
+	 * @return mixed
+	 */
+	public function getNotificationService();
+
+	/**
+	 * @param $notificationService
+	 * @return mixed
+	 */
+	public function setNotificationService($notificationService);
 }

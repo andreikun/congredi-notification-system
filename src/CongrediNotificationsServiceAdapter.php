@@ -1,5 +1,6 @@
-<?php namespace Congredi\Notifications;
+<?php namespace Congredi\NotificationSystem;
 
+use Congredi\NotificationSystem\NotificationTypes\EmailNotification;
 use Illuminate\Support\ServiceProvider;
 
 class CongrediNotificationsServiceAdapter extends ServiceProvider
@@ -21,9 +22,22 @@ class CongrediNotificationsServiceAdapter extends ServiceProvider
 	 */
 	public function register()
 	{
+		$this->registerNotificationTypes();
 		$this->registerManager();
 	}
 
+	/**
+	 * Register notification types.
+	 */
+	public function registerNotificationTypes()
+	{
+		$this->app->bindShared(EmailNotification::class, function ($app) {
+			$emailNotification = new EmailNotification();
+			$emailNotification->setNotificationService($app->make['mailer']);
+
+			return $emailNotification;
+		});
+	}
 	/**
 	 * Register Notification System Manager
 	 */
