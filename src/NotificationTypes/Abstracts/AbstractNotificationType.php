@@ -5,11 +5,18 @@ use Congredi\NotificationSystem\NotificationTypes\Interfaces\NotificationTypeInt
 abstract class AbstractNotificationType implements NotificationTypeInterface
 {
 	/**
-	 * This is the notification service wich will be used to fire notifications.
+	 * This is the notification adapter which will be used to fire notifications.
 	 *
 	 * @var
 	 */
-	protected $notificationService;
+	protected $adapter;
+
+	/**
+	 * Queue name of the notification type.
+	 *
+	 * @var
+	 */
+	protected $queueName;
 
 	/**
 	 * @param array $properties Easy way to set attributes at construction
@@ -34,16 +41,32 @@ abstract class AbstractNotificationType implements NotificationTypeInterface
 	/**
 	 * @param $notificationService
 	 */
-	public function setNotificationService($notificationService)
+	public function setAdapter($adapter)
 	{
-		$this->notificationService = $notificationService;
+		$this->adapter = $adapter;
 	}
 
 	/**
 	 * @return mixed
 	 */
-	public function getNotificationService()
+	public function getAdapter()
 	{
-		return $this->notificationService;
+		return $this->adapter;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getQueueName()
+	{
+		return $this->queueName;
+	}
+
+	/**
+	 * @param $name
+	 */
+	public function setQueueName($name)
+	{
+		$this->queueName = $name;
 	}
 }

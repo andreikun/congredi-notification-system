@@ -1,9 +1,12 @@
 <?php namespace Congredi\NotificationSystem;
 
+use Congredi\NotificationSystem\Adapters\EmailAdapter;
+use Congredi\NotificationSystem\Adapters\PushAdapter;
+use Congredi\NotificationSystem\Adapters\SmsAdapter;
 use Congredi\NotificationSystem\NotificationTypes\EmailNotification;
 use Illuminate\Support\ServiceProvider;
 
-class CongrediNotificationsServiceAdapter extends ServiceProvider
+class CongrediNotificationsServiceProvider extends ServiceProvider
 {
 	/**
 	 * Boot the service provider.
@@ -22,20 +25,33 @@ class CongrediNotificationsServiceAdapter extends ServiceProvider
 	 */
 	public function register()
 	{
-		$this->registerNotificationTypes();
+		$this->registerNotificationTypesAdapters();
 		$this->registerManager();
 	}
 
 	/**
 	 * Register notification types.
 	 */
-	public function registerNotificationTypes()
+	public function registerNotificationTypesAdapters()
 	{
-		$this->app->bindShared(EmailNotification::class, function ($app) {
-			$emailNotification = new EmailNotification();
-			$emailNotification->setNotificationService($app->make['mailer']);
+		$this->app->bindShared('notification.email.adapter', function ($app) {
+			$emailAdapter = new EmailAdapter();
+			$emailAdapter->setMailer($app->make['mailer']);
+			$emailAdapter->setConfigs($app->config['mail']);
 
-			return $emailNotification;
+			return $emailAdapter;
+		});
+
+		$this->app->bindShared('notification.sms.adapter', function ($app) {
+			$smsAdapter = new SmsAdapter();
+
+			return $smsAdapter;
+		});
+
+		$this->app->bindShared('notification.push.adapter', function ($app) {
+			$pushAdapter = new PushAdapter();
+
+			return $pushAdapter;
 		});
 	}
 	/**

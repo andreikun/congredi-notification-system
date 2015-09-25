@@ -56,7 +56,7 @@ class NotificationSystemManager implements NotificationSystemInterface
 		$notificationTypeInstance = new $className($parameters);
 
 		//Create a new instance of a general generic Job.
-		$job = new GenericJob($notificationTypeInstance);
+		$job = (new GenericJob($notificationTypeInstance))->onQueue($notificationTypeInstance->getQueueName());
 
 		$this->dispatch($job);
 

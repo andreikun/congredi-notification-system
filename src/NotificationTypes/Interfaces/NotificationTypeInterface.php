@@ -13,11 +13,22 @@ interface NotificationTypeInterface
 	/**
 	 * @return mixed
 	 */
-	public function getNotificationService();
+	public function getAdapter();
 
 	/**
-	 * @param $notificationService
+	 * @param $adapter
 	 * @return mixed
 	 */
-	public function setNotificationService($notificationService);
+	public function setAdapter($adapter);
+
+	/**
+	 * @param $name
+	 * @return mixed
+	 */
+	public function setQueueName($name);
+
+	/**
+	 * @return mixed
+	 */
+	public function getQueueName();
 }
