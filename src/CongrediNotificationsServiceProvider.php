@@ -3,7 +3,6 @@
 use Congredi\NotificationSystem\Adapters\EmailAdapter;
 use Congredi\NotificationSystem\Adapters\PushAdapter;
 use Congredi\NotificationSystem\Adapters\SmsAdapter;
-use Congredi\NotificationSystem\NotificationTypes\EmailNotification;
 use Illuminate\Support\ServiceProvider;
 
 class CongrediNotificationsServiceProvider extends ServiceProvider
@@ -36,8 +35,6 @@ class CongrediNotificationsServiceProvider extends ServiceProvider
 	{
 		$this->app->bindShared('notification.email.adapter', function ($app) {
 			$emailAdapter = new EmailAdapter();
-			$emailAdapter->setMailer($app->make['mailer']);
-			$emailAdapter->setConfigs($app->config['mail']);
 
 			return $emailAdapter;
 		});
