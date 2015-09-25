@@ -56,11 +56,6 @@ class Email extends EmailNotification
 	protected $template;
 
 	/**
-	 * @var email callback.
-	 */
-	protected $callback;
-
-	/**
 	 * @var array Email template Data
 	 */
 	protected $templateData;

@@ -24,7 +24,7 @@ abstract class AbstractNotificationType implements NotificationTypeInterface
 	public function __construct($properties = [])
 	{
 		foreach ($properties as $name => $value) {
-			if (property_exists(self::class, $name)) {
+			if (property_exists($this, $name)) {
 				$this->{$name} = $value;
 			}
 		}
