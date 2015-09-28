@@ -8,57 +8,57 @@ class Email extends EmailNotification
 	/**
 	 * @var array From Email Address
 	 */
-	protected $from;
+	public $from;
 
 	/**
 	 * @var array Sender email Address
 	 */
-	protected $sender;
+	public $sender;
 
 	/**
 	 * @var array to
 	 */
-	protected $to;
+	public $to;
 
 	/**
 	 * @var array CC
 	 */
-	protected $cc;
+	public $cc;
 
 	/**
 	 * @var array BCC
 	 */
-	protected $bcc;
+	public $bcc;
 
 	/**
 	 * @var array ReplyTo
 	 */
-	protected $replyTo;
+	public $replyTo;
 
 	/**
 	 * @var string Email Subject
 	 */
-	protected $subject;
+	public $subject;
 
 	/**
 	 * @var string Email priority
 	 */
-	protected $priority;
+	public $priority;
 
 	/**
 	 * @var array Email Attachments
 	 */
-	protected $attachments;
+	public $attachments;
 
 	/**
 	 * @var string Template Name
 	 */
-	protected $template;
+	public $template;
 
 	/**
 	 * @var array Email template Data
 	 */
-	protected $templateData;
+	public $templateData;
 
 	public function handle(EmailAdapter $adapter)
 	{
