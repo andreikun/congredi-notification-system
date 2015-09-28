@@ -4,6 +4,7 @@ use Congredi\NotificationSystem\Adapters\EmailAdapter;
 use Congredi\NotificationSystem\Adapters\PushAdapter;
 use Congredi\NotificationSystem\Adapters\SmsAdapter;
 use Illuminate\Support\ServiceProvider;
+use Congredi\NotificationSystem\Providers\PushNotification;
 
 class CongrediNotificationsServiceProvider extends ServiceProvider
 {
@@ -14,7 +15,23 @@ class CongrediNotificationsServiceProvider extends ServiceProvider
 	 */
 	public function boot()
 	{
+		$this->setupConfig();
+	}
 
+	/**
+	 * Setup the config.
+	 *
+	 * @return void
+	 */
+	protected function setupConfig()
+	{
+		$source = realpath(__DIR__ . '/../config/push-notifications.php');
+
+		if (class_exists('Illuminate\Foundation\Application', false)) {
+			$this->publishes([$source => config_path('push-notifications.php')]);
+		}
+
+		$this->mergeConfigFrom($source, 'push-notifications');
 	}
 
 	/**
@@ -24,8 +41,19 @@ class CongrediNotificationsServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
+		$this->registerProviders();
 		$this->registerNotificationTypesAdapters();
 		$this->registerManager();
+	}
+
+	/**
+	 * Register Providers.
+	 */
+	public function registerProviders()
+	{
+		$this->app->bindShared('push.notification', function($app) {
+			return new PushNotification($app['config']->get('push-notifications'));
+		});
 	}
 
 	/**
@@ -39,14 +67,14 @@ class CongrediNotificationsServiceProvider extends ServiceProvider
 			return $emailAdapter;
 		});
 
-		$this->app->bindShared('notification.sms.adapter', function ($app) {
+		$this->app->bindShared(SmsAdapter::class, function () {
 			$smsAdapter = new SmsAdapter();
 
 			return $smsAdapter;
 		});
 
-		$this->app->bindShared('notification.push.adapter', function ($app) {
-			$pushAdapter = new PushAdapter();
+		$this->app->bindShared(PushAdapter::class, function ($app) {
+			$pushAdapter = new PushAdapter($app->make['push.notification']);
 
 			return $pushAdapter;
 		});

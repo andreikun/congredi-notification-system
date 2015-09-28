@@ -1,14 +1,9 @@
 <?php namespace Congredi\NotificationSystem\Adapters;
 
-use Sly\NotificationPusher\PushManager;
+use Congredi\NotificationSystem\Providers\PushNotification;
 
 class PushAdapter
 {
-	/**
-	 * @var array
-	 */
-	protected $configs;
-
 	/**
 	 * @var string
 	 */
@@ -27,7 +22,7 @@ class PushAdapter
 	/**
 	 * @var
 	 */
-	protected $pushManager;
+	protected $pushNotification;
 
 	/**
 	 * @param $tokens
@@ -54,15 +49,35 @@ class PushAdapter
 	}
 
 	/**
-	 * @param \Sly\NotificationPusher\PushManager $pushManager
+	 * @param $pushNotification
 	 */
-	public function __construct(PushManager $pushManager = null)
+	public function __construct($pushNotification)
 	{
-		$this->pushManager = $pushManager;
+		$this->pushNotification = $pushNotification;
 	}
 
+	/**
+	 * Send Push Notification
+	 */
 	public function send()
 	{
+		$args = [];
+		foreach($this->tokens as $token) {
+			$args[] = PushNotification::Device($token);
+		}
 
+		$devices = call_user_func_array([PushNotification::class, 'DeviceCollection'], $args);
+
+		$messageText = (!empty($this->messageData['text'])) ? $this->messageData['text'] : '';
+
+		$messageOptions = (!empty($this->messageData['options'])) ? $this->messageData['options'] : [];
+
+		$message = PushNotification::Message($messageText, $messageOptions);
+
+		$this->pushNotification->app(implode("_", [$this->adapterType, app()->environment()]))
+			->to($devices)
+			->send($message);
+
+		return true;
 	}
 }
