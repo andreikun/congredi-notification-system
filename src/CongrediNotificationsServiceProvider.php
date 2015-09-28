@@ -34,7 +34,7 @@ class CongrediNotificationsServiceProvider extends ServiceProvider
 	public function registerNotificationTypesAdapters()
 	{
 		$this->app->bindShared(EmailAdapter::class, function ($app) {
-			$emailAdapter = new EmailAdapter($app->make('mailer'), $app->config('mail'));
+			$emailAdapter = new EmailAdapter($app->make('mailer'), $app['config']->get('mail'));
 
 			return $emailAdapter;
 		});
