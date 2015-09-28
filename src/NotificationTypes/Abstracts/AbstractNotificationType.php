@@ -5,13 +5,6 @@ use Congredi\NotificationSystem\NotificationTypes\Interfaces\NotificationTypeInt
 abstract class AbstractNotificationType implements NotificationTypeInterface
 {
 	/**
-	 * This is the notification adapter which will be used to fire notifications.
-	 *
-	 * @var
-	 */
-	protected $adapter;
-
-	/**
 	 * Queue name of the notification type.
 	 *
 	 * @var
@@ -38,24 +31,6 @@ abstract class AbstractNotificationType implements NotificationTypeInterface
 	public static function className()
 	{
 		return static::class;
-	}
-
-	/**
-	 * @param $adapter
-	 *
-	 * @return void
-	 */
-	public function setAdapter($adapter)
-	{
-		$this->adapter = $adapter;
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function getAdapter()
-	{
-		return $this->adapter;
 	}
 
 	/**

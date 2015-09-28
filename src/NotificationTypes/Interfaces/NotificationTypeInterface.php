@@ -11,18 +11,6 @@ interface NotificationTypeInterface
 	public static function className();
 
 	/**
-	 * @return mixed
-	 */
-	public function getAdapter();
-
-	/**
-	 * @param $adapter
-	 *
-	 * @return void
-	 */
-	public function setAdapter($adapter);
-
-	/**
 	 * @param $name
 	 *
 	 * @return void
