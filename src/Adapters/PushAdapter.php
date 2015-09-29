@@ -66,7 +66,7 @@ class PushAdapter
 			$args[] = PushNotification::Device($token);
 		}
 
-		$devices = call_user_func_array([PushNotification::class, 'DeviceCollection'], $args);
+		$devices = PushNotification::DeviceCollection($args);
 
 		$messageText = (!empty($this->messageData['text'])) ? $this->messageData['text'] : '';
 
