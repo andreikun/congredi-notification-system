@@ -61,12 +61,21 @@ class PushNotification
 	/**
 	 * Create a new push notification instance.
 	 *
-	 * @param $appName
+	 * @param $pushConfigs
 	 * @return $this
 	 */
-	public function app($appName)
+	public function app($pushConfigs)
 	{
-		$config = is_array($appName) ? $appName : $this->configs;
+		$defaultConfigs = [
+			'service' => 'apns',
+			'environment' => 'production'
+		];
+
+		$config = $pushConfigs;
+
+		if (is_string($pushConfigs)) {
+			$config = (isset($this->configs[$pushConfigs])) ? $this->configs[$pushConfigs] : $defaultConfigs;
+		}
 
 		$this->pushManager = new PushManager($config['environment'] == "development"
 			? PushManager::ENVIRONMENT_DEV : PushManager::ENVIRONMENT_PROD);

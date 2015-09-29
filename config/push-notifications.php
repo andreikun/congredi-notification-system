@@ -16,7 +16,7 @@ return [
 			'apiKey' =>'yourAPIKey',
 		]
 	],
-	'apns_development' => [
+	'apns_local' => [
 		'environment' =>'production',
 		'service'     =>'apns',
 		'options' => [
@@ -24,7 +24,7 @@ return [
 			'passPhrase'  =>'password',
 		]
 	],
-	'gcm_development' => [
+	'gcm_local' => [
 		'environment' =>'production',
 		'service'     =>'gcm',
 		'options' => [

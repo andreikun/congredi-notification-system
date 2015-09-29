@@ -74,7 +74,7 @@ class CongrediNotificationsServiceProvider extends ServiceProvider
 		});
 
 		$this->app->bindShared(PushAdapter::class, function ($app) {
-			$pushAdapter = new PushAdapter($app->make['push.notification']);
+			$pushAdapter = new PushAdapter($app->make('push.notification'));
 
 			return $pushAdapter;
 		});
