@@ -3,7 +3,6 @@
 use Congredi\NotificationSystem\Drivers\SMS\DriverInterface;
 use Congredi\NotificationSystem\Drivers\SMS\SmsMessage;
 use Illuminate\Container\Container;
-use Illuminate\Log\Writer;
 
 class SMSNotification
 {
@@ -18,7 +17,7 @@ class SMSNotification
 	protected $driver;
 
 	/**
-	 * @var \Illuminate\Log\Writer;
+	 * @var
 	 */
 	protected $logger;
 
@@ -136,12 +135,10 @@ class SMSNotification
 	}
 
 	/**
-	 * Set the log writer instance.
-	 *
-	 * @param \Illuminate\Log\Writer $logger
+	 * @param $logger
 	 * @return $this
 	 */
-	public function setLogger(Writer $logger)
+	public function setLogger($logger)
 	{
 		$this->logger = $logger;
 

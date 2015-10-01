@@ -100,7 +100,7 @@ class CongrediNotificationsServiceProvider extends ServiceProvider
 				return new EmailSMS($this->app->make('mailer'));
 			case 'twilio':
 				$twilioClient = new \Services_Twilio(
-					$config['twilio']['account_.id'],
+					$config['twilio']['account_sid'],
 					$config['twilio']['auth_token']
 				);
 

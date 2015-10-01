@@ -28,7 +28,7 @@ class SMS extends SmsNotificationType
 	/**
 	 * @var array MessageData
 	 */
-	public $messageData;
+	public $messageData = [];
 
 	/**
 	 * @var boolean

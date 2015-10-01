@@ -22,13 +22,17 @@ class TwillioSMS implements DriverInterface
 
 		$bodyMessage = $message->composeMessage();
 
-		foreach ($message->getTo() as $receiver) {
-			$this->twillioClient->account->messages->sendMessage([
-				'To' => $receiver,
-				'From' => $from,
-				'Body' => $bodyMessage,
-				'MediaUrl' => $message->getAttachImages(),
-			]);
+		$receivers = $message->getTo();
+
+		if (!empty($receivers)) {
+			foreach ($receivers as $receiver) {
+				$this->twillioClient->account->messages->create([
+					'To' => $receiver,
+					'From' => $from,
+					'Body' => $bodyMessage,
+					'MediaUrl' => $message->getAttachImages(),
+				]);
+			}
 		}
 	}
 }
