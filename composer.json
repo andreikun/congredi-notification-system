@@ -13,7 +13,10 @@
 		"illuminate/queue": "5.1.*",
 		"illuminate/contracts": "5.1.*",
 		"illuminate/bus": "5.1.*",
-		"sly/notification-pusher" : "2.2.11"
+		"illuminate/view": "5.1.*",
+		"illuminate/log": "5.1.*",
+		"sly/notification-pusher" : "2.2.11",
+		"twilio/sdk": "4.5"
 	},
 	"autoload": {
 		"psr-4": {
