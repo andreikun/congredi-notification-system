@@ -88,12 +88,35 @@ class CongrediNotificationsServiceProvider extends ServiceProvider
 	}
 
 	/**
+	 * @param $config
+	 * @return \Congredi\NotificationSystem\Drivers\SMS\EmailSMS
+	 */
+	protected function detectSMSSender($config)
+	{
+		$driver = (isset($config['driver'])) ? $config['driver'] : 'email';
+
+		switch ($driver) {
+			case 'email':
+				return new EmailSMS($this->app->make('mailer'));
+			case 'twilio':
+				$twilioClient = new \Services_Twilio(
+					$config['twilio']['account_.id'],
+					$config['twilio']['auth_token']
+				);
+
+				return new TwillioSMS($twilioClient);
+			default:
+				throw new \InvalidArgumentException('Invalid SMS Driver.');
+		}
+	}
+
+	/**
 	 * Register notification types.
 	 */
 	public function registerNotificationTypesAdapters()
 	{
 		$this->app->bindShared(EmailAdapter::class, function ($app) {
-			$emailAdapter = new EmailAdapter($app->make('mailer'), $app['config']->get('mail'));
+			$emailAdapter = new EmailAdapter($app->make('mailer'));
 
 			return $emailAdapter;
 		});
@@ -125,29 +148,6 @@ class CongrediNotificationsServiceProvider extends ServiceProvider
 		$this->app->singleton(NotificationSystemManager::class, function ($app) {
 			return $app['notificationSystem.manager'];
 		});
-	}
-
-	/**
-	 * @param $config
-	 * @return \Congredi\NotificationSystem\Drivers\SMS\EmailSMS
-	 */
-	protected function detectSMSSender($config)
-	{
-		$driver = (isset($config['driver'])) ? $config['driver'] : 'email';
-
-		switch ($driver) {
-			case 'email':
-				return new EmailSMS($this->app->make('mailer'));
-			case 'twilio':
-				$twilioClient = new \Services_Twilio(
-					$config['twilio']['account_.id'],
-					$config['twilio']['auth_token']
-				);
-
-				return new TwillioSMS($twilioClient);
-			default:
-				throw new \InvalidArgumentException('Invalid SMS Driver.');
-		}
 	}
 
 	/**

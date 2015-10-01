@@ -1,5 +1,6 @@
 <?php namespace Congredi\NotificationSystem\Adapters;
 
+use Congredi\NotificationSystem\Notifications\Email;
 use Illuminate\Contracts\Mail\Mailer;
 
 class EmailAdapter
@@ -9,21 +10,7 @@ class EmailAdapter
 	 */
 	protected $mailer;
 
-	/**
-	 * @var
-	 */
-	protected $configs;
-
-	public function __construct(Mailer $mailer, $configs)
-	{
-		$this->mailer = $mailer;
-		$this->configs = $configs;
-	}
-
-	/**
-	 * @param $mailer
-	 */
-	public function setMailer($mailer)
+	public function __construct(Mailer $mailer)
 	{
 		$this->mailer = $mailer;
 	}
@@ -37,24 +24,16 @@ class EmailAdapter
 	}
 
 	/**
-	 * @return mixed
+	 * @param $mailer
 	 */
-	public function getConfigs()
+	public function setMailer($mailer)
 	{
-		return $this->configs;
+		$this->mailer = $mailer;
 	}
 
-	/**
-	 * @param $configs
-	 */
-	public function setConfigs($configs)
+	public function send(Email $emailData)
 	{
-		$this->configs = $configs;
-	}
-
-	public function send($emailData)
-	{
-		$this->mailer->send($emailData->template, $emailData->templateData, function($message) use ($emailData) {
+		$this->mailer->send($emailData->template, $emailData->templateData, function ($message) use ($emailData) {
 			if (!empty($emailData->from)) {
 				$message->from(
 					$emailData->from['address'],
@@ -112,7 +91,8 @@ class EmailAdapter
 							$attachment['pathToFile'],
 							(isset($attachment['options'])) ? isset($attachment['options']) : array()
 						);
-					} else {
+					}
+					else {
 						$message->attachData(
 							$attachment['data'],
 							$attachment['name'],

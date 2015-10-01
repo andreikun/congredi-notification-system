@@ -57,6 +57,16 @@ class SMSNotification
 	}
 
 	/**
+	 * Sets if SMS should be fake send a SMS
+	 *
+	 * @param bool $pretend
+	 */
+	public function setPretending($pretend = false)
+	{
+		$this->pretending = $pretend;
+	}
+
+	/**
 	 * Fake sending a SMS
 	 *
 	 * @param $view
@@ -65,7 +75,7 @@ class SMSNotification
 	 */
 	public function pretend($view, $data, $callback)
 	{
-		$this->isPretending = true;
+		$this->setPretending(true);
 
 		$this->send($view, $data, $callback);
 	}
