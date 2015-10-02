@@ -24,13 +24,15 @@ class TwillioSMS implements DriverInterface
 
 		$receivers = $message->getTo();
 
+		$attachments = $message->getAttachImages();
+
 		if (!empty($receivers)) {
 			foreach ($receivers as $receiver) {
 				$this->twillioClient->account->messages->create([
 					'To' => $receiver,
 					'From' => $from,
 					'Body' => $bodyMessage,
-					'MediaUrl' => $message->getAttachImages(),
+					'MediaUrl' => $attachments,
 				]);
 			}
 		}

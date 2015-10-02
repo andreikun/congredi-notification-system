@@ -21,7 +21,7 @@
 
 return [
 	'driver' => 'twilio',
-	'from' => '+15005550000',
+	'from' => '+15005550006',
 	'twilio' => [
         'account_sid' => 'AC0cdecfe1ac6122a004f27b98dec15e87',
         'auth_token' => 'ecbb711d5eb830d52015b331f99ac3b1',
