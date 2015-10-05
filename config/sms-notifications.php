@@ -28,7 +28,10 @@ return [
 	],
     'clickatell' => [
         'username' => 'kunandrei',
-        'password' => 'UfdcBNfNPXQCJT',
+        'password' => 'HJiu65r',
         'app_id' => '3565578'
+    ],
+    'cmsms' => [
+        'product_token' => '04a7f1bb-fe5b-4159-9e43-6818961541d0'
     ]
 ];

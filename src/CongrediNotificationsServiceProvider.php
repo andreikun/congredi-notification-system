@@ -5,6 +5,7 @@ use Congredi\NotificationSystem\Adapters\EmailAdapter;
 use Congredi\NotificationSystem\Adapters\PushAdapter;
 use Congredi\NotificationSystem\Adapters\SmsAdapter;
 use Congredi\NotificationSystem\Drivers\SMS\ClickatellSMS;
+use Congredi\NotificationSystem\Drivers\SMS\CMSMSGateway;
 use Congredi\NotificationSystem\Drivers\SMS\EmailSMS;
 use Congredi\NotificationSystem\Drivers\SMS\TwillioSMS;
 use Congredi\NotificationSystem\Providers\SMSNotification;
@@ -115,6 +116,8 @@ class CongrediNotificationsServiceProvider extends ServiceProvider
 				);
 
 				return new ClickatellSMS($clickatell);
+			case 'cmsms':
+				return new CMSMSGateway($config['cmsms']['product_token']);
 			default:
 				throw new \InvalidArgumentException('Invalid SMS Driver.');
 		}
