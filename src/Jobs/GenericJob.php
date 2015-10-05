@@ -6,7 +6,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Congredi\NotificationSystem\NotificationTypes\Interfaces\NotificationTypeInterface;
-use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Support\Facades\App;
 
 class GenericJob implements SelfHandling, ShouldQueue
 {
