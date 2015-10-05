@@ -17,7 +17,7 @@ return [
 		]
 	],
 	'apns_local' => [
-		'environment' =>'production',
+		'environment' =>'development',
 		'service'     =>'apns',
 		'options' => [
 			'certificate' =>'/path/to/certificate.pem',
@@ -25,7 +25,7 @@ return [
 		]
 	],
 	'gcm_local' => [
-		'environment' =>'production',
+		'environment' =>'development',
 		'service'     =>'gcm',
 		'options' => [
 			'apiKey' =>'yourAPIKey',
