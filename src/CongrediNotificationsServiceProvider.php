@@ -1,8 +1,10 @@
 <?php namespace Congredi\NotificationSystem;
 
+use Clickatell\Api\ClickatellHttp;
 use Congredi\NotificationSystem\Adapters\EmailAdapter;
 use Congredi\NotificationSystem\Adapters\PushAdapter;
 use Congredi\NotificationSystem\Adapters\SmsAdapter;
+use Congredi\NotificationSystem\Drivers\SMS\ClickatellSMS;
 use Congredi\NotificationSystem\Drivers\SMS\EmailSMS;
 use Congredi\NotificationSystem\Drivers\SMS\TwillioSMS;
 use Congredi\NotificationSystem\Providers\SMSNotification;
@@ -105,6 +107,14 @@ class CongrediNotificationsServiceProvider extends ServiceProvider
 				);
 
 				return new TwillioSMS($twilioClient);
+			case 'clickatell':
+				$clickatell = new ClickatellHttp(
+					$config['clickatell']['username'],
+					$config['clickatell']['password'],
+					$config['clickatell']['app_id']
+				);
+
+				return new ClickatellSMS($clickatell);
 			default:
 				throw new \InvalidArgumentException('Invalid SMS Driver.');
 		}
